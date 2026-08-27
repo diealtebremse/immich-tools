@@ -66,3 +66,12 @@ h1 { font-size: 17px; margin: 0 0 4px; font-weight: 600; }
   padding: 11px 22px; flex-wrap: wrap;
 }
 #leiste .stand { margin-left: auto; color: var(--gedaempft); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+/* Handy: groessere Tippziele, Bild darf mehr Hoehe nehmen. */
+@media (max-width: 700px) {
+  .huelle { padding: 18px 14px 96px; }
+  .fokus .gross { max-height: 46vh; }
+  .fokus .streifen img { width: 76px; height: 76px; }
+  button { padding: 10px 14px; }
+  .bogen { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
+}

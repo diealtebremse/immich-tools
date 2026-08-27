@@ -68,6 +68,16 @@ export const Fokus = ({
         )}
       </div>
       <div className="zeile">
+        {/* Ohne diese beiden ist Blaettern auf einem Geraet ohne Tastatur unmoeglich. */}
+        <button onClick={() => setzeIndex(Math.max(0, index - 1))} disabled={index === 0}>
+          ← Zurück
+        </button>
+        <button
+          onClick={() => setzeIndex(Math.min(slots.length - 1, index + 1))}
+          disabled={index === slots.length - 1}
+        >
+          Weiter →
+        </button>
         <button onClick={mehrAlternativen} disabled={auswahl.length >= slot.alternativen.length - 1}>
           Mehr Alternativen
         </button>

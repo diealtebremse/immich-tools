@@ -3,3 +3,6 @@ dist/
 .env
 .scratch/album-kurator/prototype/.cache/
 .scratch/album-kurator/prototype/thumbs/
+
+# Protokolle der Zuordnungskorrektur
+protokoll-*.jsonl
