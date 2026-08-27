@@ -7,6 +7,8 @@ import { erzeugeVorschlag, pruefeGesichter, type Lauf } from './domain/pipeline'
 import { STANDARD_OPTIONEN, type Slot } from './domain/types'
 import { ladeFortschritt, leereMerkmale, speichereFortschritt, verwirfFortschritt } from './store/cache'
 import { Fokus } from './ui/Fokus'
+import { FokusMobil } from './ui/FokusMobil'
+import { useSchmalesGeraet } from './ui/useSchmalesGeraet'
 import { Kontaktbogen } from './ui/Kontaktbogen'
 import { Setup } from './ui/Setup'
 
@@ -20,6 +22,7 @@ const SCHRITT = 8
 const ERWARTETE_VERSION = '3.1.0'
 
 export const App = () => {
+  const schmal = useSchmalesGeraet()
   const [phase, setzePhase] = useState<Phase>('setup')
   const [personen, setzePersonen] = useState<Person[]>([])
   const [gewaehlt, setzeGewaehlt] = useState<string[]>([])
@@ -136,6 +139,8 @@ export const App = () => {
   // Was den Slot belegt, gehoert nicht in seinen eigenen Alternativstreifen.
   const angebot = (slots[index]?.alternativen ?? []).filter((id) => id !== slots[index]?.aktuell)
   const sichtbar = Math.min(angeboten[index] ?? SCHRITT, angebot.length)
+  // Wischen statt Pfeiltasten unterhalb der Breite, ab der Touch die bessere Bedienung ist.
+  const FokusKomponente = schmal ? FokusMobil : Fokus
 
   return (
     <div className="huelle">
@@ -184,7 +189,7 @@ export const App = () => {
         )}
 
         {phase === 'fokus' && slots[index] && (
-          <Fokus
+          <FokusKomponente
             slots={slots}
             auswahl={angebot.slice(0, sichtbar)}
             index={index}
